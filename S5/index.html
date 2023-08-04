@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        #root {
+            background-color: tomato;
+            color: white;
+            font-size: 2em;
+            text-align: center;
+            height: 100vh;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <input type="text" placeholder="username" id="usernameInput" />
+        <input type="password" placeholder="password" id="passwordInput" />
+        <button onclick="onLogin()" id="loginButton">LOGIN</button>
+        <button onclick="onLogout()" id="logoutButton">LOGOUT</button>
+        <br>
+        <br>
+        <h1 id="admin">LOGIN SEBAGAI ADMIN</h1>
+        <h1 id="basic">LOGIN SEBAGAI USER BIASA</h1>
+    </div>
+
+    <script type="application/javascript">
+
+        let usernameInput = document.getElementById('usernameInput');
+        let passwordInput = document.getElementById('passwordInput');
+        let loginButton = document.getElementById('loginButton');
+        let logoutButton = document.getElementById('logoutButton');
+        let admin = document.getElementById('admin');
+        let basic = document.getElementById('basic');
+
+        admin.style.display = "none";
+        basic.style.display = "none";
+        logoutButton.style.display = "none";
+
+
+
+        function onLogin() {
+            // console.log('test tombol klik');
+            // console.log(usernameInput.value);
+            // console.log(passwordInput.value);
+            localStorage.setItem("username", usernameInput.value);
+            logoutButton.style.display ="block";
+
+            if (usernameInput.value == "admin" && passwordInput.value == "admin123") {
+
+                usernameInput.style.display = "none";
+                passwordInput.style.display = "none";
+                loginButton.style.display = "none";
+                localStorage.setItem("role", "admin");
+                admin.style.display = "block";
+                basic.style.display = "none";
+            } else {
+
+                usernameInput.style.display = "none";
+                passwordInput.style.display = "none";
+                loginButton.style.display = "none";
+                localStorage.setItem("role", "basic");
+                basic.style.display = "block";
+                admin.style.display = "none";
+            }
+
+        }
+
+        if (localStorage.getItem('username')) {
+            usernameInput.style.display = "none";
+            passwordInput.style.display = "none";
+            loginButton.style.display = "none";
+            logoutButton.style.display ="block";
+            if (localStorage.getItem('role') == "admin") {
+                admin.style.display = "block";
+                basic.style.display = "none";
+            } else {
+                admin.style.display = "none";
+                basic.style.display = "block";
+            }
+        }
+
+        function onLogout(){
+            localStorage.clear();
+            location.reload();
+        }
+
+
+
+
+
+        // const myName = "Iqbal Jauhari";
+        // const myHobby = "Rubix Steal";
+
+        // let root = document.getElementById('root');
+        // // console.log('root: ', root)
+        // root.textContent = myName + ' ' + myHobby;
+        // root.style.backgroundColor = "tomato";
+        // root.style.color = "white";
+        // root.style.fontSize = "2em";
+        // root.style.textAlign = "center";
+        // root.style.height = "100vh";
+
+    </script>
+</body>
+
+</html>
